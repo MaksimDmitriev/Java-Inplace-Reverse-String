@@ -1,0 +1,41 @@
+package careercup.fb.irs;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String input = "We wish you a merry Christmass";
+        String reversedString = reverseString(input);
+        String output = reverseWords(reversedString);
+        System.out.println(output);
+    }
+
+    private static String reverseString(String input) {
+        char[] inputAsArray = input.toCharArray();
+        int start = 0, end = inputAsArray.length - 1;
+        reverse(start, end, inputAsArray);
+        return new String(inputAsArray);
+    }
+
+    private static String reverseWords(String reversed) {
+        char[] reversedAsArray = reversed.toCharArray();
+        int startIndex = 0;
+        int endIndex = reversed.indexOf(" ");
+        while (endIndex != -1) {
+            reverse(startIndex, endIndex - 1, reversedAsArray);
+            startIndex = ++endIndex;
+            endIndex = reversed.indexOf(" ", startIndex);
+        }
+        return new String(reversedAsArray);
+    }
+
+    private static void reverse(int start, int end, char[] inputAsArray) {
+        while (start < end) {
+            char temp = inputAsArray[start];
+            inputAsArray[start] = inputAsArray[end];
+            inputAsArray[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+}

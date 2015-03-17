@@ -2,6 +2,8 @@ package careercup.fb.irs;
 
 public class Main {
 
+    private static final String SPACE = " ";
+
     // http://www.careercup.com/question?id=5717567253512192
     public static void main(String[] args) {
         String input = "We wish you a merry Christmass";
@@ -20,11 +22,16 @@ public class Main {
     private static String reverseWords(String reversed) {
         char[] reversedAsArray = reversed.toCharArray();
         int startIndex = 0;
-        int endIndex = reversed.indexOf(" ");
+        int endIndex = reversed.indexOf(SPACE);
+        final int lastSpace = reversed.lastIndexOf(SPACE);
         while (endIndex != -1) {
             reverse(startIndex, endIndex - 1, reversedAsArray);
             startIndex = ++endIndex;
-            endIndex = reversed.indexOf(" ", startIndex);
+            if (startIndex - 1 == lastSpace) {
+                endIndex = reversed.length();
+            } else {
+                endIndex = reversed.indexOf(SPACE, startIndex);
+            }
         }
         return new String(reversedAsArray);
     }
